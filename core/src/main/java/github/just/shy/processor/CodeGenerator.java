@@ -1,4 +1,4 @@
-package org.justice.processor;
+package github.just.shy.processor;
 
 import cn.hutool.core.util.StrUtil;
 import com.squareup.javapoet.*;

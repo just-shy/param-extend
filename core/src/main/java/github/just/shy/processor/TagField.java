@@ -1,8 +1,8 @@
-package org.justice.processor;
+package github.just.shy.processor;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import org.justice.annotation.ParamTypes;
+import github.just.shy.annotation.ParamTypes;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;

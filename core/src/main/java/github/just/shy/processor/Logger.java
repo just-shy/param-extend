@@ -1,4 +1,4 @@
-package org.justice.processor;
+package github.just.shy.processor;
 
 import javax.tools.Diagnostic;
 

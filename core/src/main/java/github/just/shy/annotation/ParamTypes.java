@@ -1,4 +1,4 @@
-package org.justice.annotation;
+package github.just.shy.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

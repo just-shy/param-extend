@@ -1,4 +1,4 @@
-package org.justice;
+package github.just.shy;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;

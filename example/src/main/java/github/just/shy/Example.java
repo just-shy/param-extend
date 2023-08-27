@@ -1,7 +1,7 @@
-package org.justice;
+package github.just.shy;
 
 import lombok.Data;
-import org.justice.annotation.ParamTypes;
+import github.just.shy.annotation.ParamTypes;
 
 @Data
 public class Example {
