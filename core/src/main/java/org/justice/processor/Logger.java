@@ -13,9 +13,9 @@ public class Logger {
     public static void warn(String warn){
         ProcessorContext.messager.printMessage(Diagnostic.Kind.WARNING,warn);
     }
-
     public static void error(String error){
         ProcessorContext.messager.printMessage(Diagnostic.Kind.ERROR,error);
     }
 
 }
+

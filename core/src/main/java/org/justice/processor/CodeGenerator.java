@@ -3,7 +3,6 @@ package org.justice.processor;
 import cn.hutool.core.util.StrUtil;
 import com.squareup.javapoet.*;
 import javax.lang.model.element.Modifier;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,12 +28,15 @@ public class CodeGenerator {
     private static void generatorInner(Map<String, List<TagField>> innerClassMap, TagClass tagClass){
 
         // 获取外部类的名称
-        String outerClassName = tagClass.getClassName();
+        String outerClassName = tagClass.getClassName() + "Param";
         // 获取外部类的包名
         String packageName = tagClass.getPackageName();
         TypeSpec.Builder classBuilder = TypeSpec.classBuilder(outerClassName);
+        classBuilder.addModifiers(tagClass.getModifiers().toArray(new Modifier[0]));
         innerClassMap.forEach(
                 (className,fields) ->{
+                    //内部类的限定名
+                    String qualifiedName = outerClassName + "." + className;
                     //内部类的类名和修饰符
                     TypeSpec.Builder typeBuilder = TypeSpec.classBuilder(className)
                             .addModifiers(tagClass.getModifiers().toArray(new Modifier[0]));
@@ -56,7 +58,7 @@ public class CodeGenerator {
                                         .build())
                                 .addMethod(MethodSpec.methodBuilder(StrUtil.toCamelCase("set_" + name))
                                         .addModifiers(Modifier.PUBLIC)
-                                        .returns(ClassName.get(packageName, className)) // 返回内部类自身的 TypeName
+                                        .returns(ClassName.get(packageName, qualifiedName)) // 返回内部类自身的 TypeName
                                         .addStatement("this.$L = $L", name, name) // 设置字段的值
                                         .addStatement("return this") // 返回内部类自身
                                         .build());
@@ -68,11 +70,10 @@ public class CodeGenerator {
 
         // 创建源文件
         JavaFile javaFile = JavaFile.builder(packageName,classBuilder.build()).build();
-
         // 写入文件
         try {
             javaFile.writeTo(ProcessorContext.filer);
-        } catch (IOException e) {
+        } catch (Exception e) {
             Logger.error(e.toString());
         }
     }
